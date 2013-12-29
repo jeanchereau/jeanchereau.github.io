@@ -1,0 +1,12 @@
+# Ignore Webstorm files
+.idea/
+
+# Ignore Docs
+docs/
+
+# Ignore Node files
+node_modules/
+nodejs/
+
+# Ignore Dummy Files
+temp/
