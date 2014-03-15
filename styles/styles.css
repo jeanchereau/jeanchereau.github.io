@@ -1,0 +1,26 @@
+h1{
+    color:red;
+    font-family: Arial;
+    font-size: 32px;
+    background-color: yellow;
+    border: solid 1px blue;
+}
+h1#titre1, h1#titre2{
+    color:blue;
+}
+.urgent{
+    text-decoration: underline;
+}
+h2{
+    color:#00FF00;
+}
+div#second{
+    display: none;
+}
+.interesting{
+    style: bold;
+    color: yellow;
+    background-color: black;
+    border: dashed 3px red;
+
+}
