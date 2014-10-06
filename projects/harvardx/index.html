@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HarvardX Interactive Learning Challenge</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2014.2.903/js/kendo.all.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>HarvardX Interactive Learning Challenge</h1>
+    </div>
+    <div class="row">
+        <blockquote>
+            <p>Interactive visualization of the <a href="http://en.wikipedia.org/wiki/Binomial_distribution">binomial distribution</a> by Jean Chereau (London, UK). <a href="http://databits.io/challenges">More info...</a></p>
+        </blockquote>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 area">
+            <div id="description" class="panel panel-default">
+                <div class="panel-heading">Descripton</div>
+                <div class="panel-body k-content">
+                    <p>The binomial distribution is the discrete probability distribution of the number of successes in a sequence of n independent yes/no experiments (draws), each of which yields success with probability p (success probability).</p>
+                    <p>Imagine a biased coin which comes up heads with probability 0.3 (success probability) when tossed. Toss it as many times as you want (draws).</p>
+                    <p>Click <strong>Run</strong> to run the experiment.</p>
+                    <button id="run" type="button" data-type="button" class="btn btn-primary">Run</button>
+                    <p><div id="progress" data-role="progressbar" data-type="percent" data-animation="false" data-bind="value:progress"  style="width:100%"></div></p>
+                </div>
+            </div>
+            <div id="series1" class="panel panel-default">
+                <div class="panel-heading">Parameters</div>
+                <div class="panel-body k-content">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="sp">Success probability: </label>
+                            <p><input id="sp" type="number" data-min="0.01" data-max="0.99" data-step="0.01" data-role="numerictextbox" data-format="p" data-bind="value:sp, events:{change:reset}"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="fp">Failure probability: </label>
+                            <p id="fp" class="form-control-static" data-bind="text:fp"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="d">Number of draws: </label>
+                            <p><input id="d" type="number" data-min="1" data-max="150" data-role="numerictextbox" data-format="#" data-bind="value:d, events:{change:reset}"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 area">
+            <div id="pmf" class="panel panel-default">
+                <div class="panel-heading">
+                    Probability mass function
+                </div>
+                <div class="panel-body k-content">
+                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{categoryField:'sn',field:'pmf'}]" data-tooltip="{visible:true}" data-bind="source: pmf"></div>
+                </div>
+            </div>
+            <div id="cdf" class="panel panel-default">
+                <div class="panel-heading">
+                    Cumulative distribution function
+                </div>
+                <div class="panel-body k-content">
+                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{categoryField:'sn',field:'cdf'}]" data-tooltip="{visible:true}" data-bind="source: cdf"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
