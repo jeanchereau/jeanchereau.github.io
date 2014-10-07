@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head lang="en">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,12 +12,6 @@
     <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
     <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.dataviz.min.css" rel="stylesheet" />
     <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://cdn.kendostatic.com/2014.2.903/js/kendo.all.min.js"></script>
@@ -39,28 +33,68 @@
             <div id="description" class="panel panel-default">
                 <div class="panel-heading">Descripton</div>
                 <div class="panel-body k-content">
-                    <p>The binomial distribution is the discrete probability distribution of the number of successes in a sequence of n independent yes/no experiments (draws), each of which yields success with probability p (success probability).</p>
-                    <p>Imagine a biased coin which comes up heads with probability 0.3 (success probability) when tossed. Toss it as many times as you want (draws).</p>
-                    <p>Click <strong>Run</strong> to run the experiment.</p>
-                    <button id="run" type="button" data-type="button" class="btn btn-primary">Run</button>
-                    <p><div id="progress" data-role="progressbar" data-type="percent" data-animation="false" data-bind="value:progress"  style="width:100%"></div></p>
+                    <div class="form-group">
+                        <p>The binomial distribution is the discrete probability distribution of the number of successes in a sequence of <strong>n</strong> independent yes/no experiments, each of which yields success with probability <strong>p</strong>.</p>
+                    </div>
+                    <div class="form-group">
+                        <p><div id="progress" data-role="progressbar" data-type="percent" data-animation="false" data-bind="value:progress"  style="width:100%"></div></p>
+                    </div>
                 </div>
             </div>
-            <div id="series1" class="panel panel-default">
-                <div class="panel-heading">Parameters</div>
+            <div id="binomial" class="panel panel-default">
+                <div class="panel-heading">Binomial distribution</div>
                 <div class="panel-body k-content">
                     <form role="form">
                         <div class="form-group">
-                            <label for="sp">Success probability: </label>
-                            <p><input id="sp" type="number" data-min="0.01" data-max="0.99" data-step="0.01" data-role="numerictextbox" data-format="p" data-bind="value:sp, events:{change:reset}"></p>
+                            <label for="sp">Success probability (p): </label>
+                            <span class="form-control-static" data-bind="text:$sp"></span>
+                            <p><input id="sp" type="number" data-min="0" data-max="1" data-small-step="0.01" data-large-step="0.1" data-tick-placement="none" data-role="slider" data-bind="value:sp, events:{change:redraw}" style="width:100%"></p>
                         </div>
                         <div class="form-group">
-                            <label for="fp">Failure probability: </label>
-                            <p id="fp" class="form-control-static" data-bind="text:fp"></p>
+                            <label for="fp">Failure probability (1-p): </label>
+                            <span id="fp" class="form-control-static" data-bind="text:$fp"></span>
                         </div>
                         <div class="form-group">
-                            <label for="d">Number of draws: </label>
-                            <p><input id="d" type="number" data-min="1" data-max="150" data-role="numerictextbox" data-format="#" data-bind="value:d, events:{change:reset}"></p>
+                            <label for="d">Number of experiments (n): </label>
+                            <span class="form-control-static" data-bind="text:e"></span>
+                            <p><input id="d" type="number" data-min="1" data-max="150" data-small-step="1" data-large-step="10" data-tick-placement="none" data-role="slider" data-bind="value:e, events:{change:redraw}" style="width:100%"></p>
+                        </div>
+                        <div class="form-group">
+                            <label class="radio-inline">
+                                <input type="radio" name="binType" value="line" data-bind="checked:binType,events:{change:redraw}"> Line
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="binType" value="column" data-bind="checked:binType,events:{change:redraw}"> Column
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="binType" value="hide" data-bind="checked:binType,events:{change:redraw}"> Hide
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="Gaussian" class="panel panel-default">
+                <div class="panel-heading">Gaussian distribution</div>
+                <div class="panel-body k-content">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="m">Mean (np): </label>
+                            <span id="m" class="form-control-static" data-bind="text:mean"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="v">Variance (np(1-p)): </label>
+                            <span id="v" class="form-control-static" data-bind="text:var"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="radio-inline">
+                                <input type="radio" name="gauType" value="line" data-bind="checked:gauType,events:{change:redraw}"> Line
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="gauType" value="column" data-bind="checked:gauType,events:{change:redraw}"> Column
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="gauType" value="hide" data-bind="checked:gauType,events:{change:redraw}"> Hide
+                            </label>
                         </div>
                     </form>
                 </div>
@@ -72,7 +106,8 @@
                     Probability mass function
                 </div>
                 <div class="panel-body k-content">
-                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{categoryField:'sn',field:'pmf'}]" data-tooltip="{visible:true}" data-bind="source: pmf"></div>
+                    <p>The probability mass function (PMF), or just probability function, describes the probability that a real-valued random variable X with a given probability distribution will be found to have a value equal to x.</p>
+                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Binomial',field:'bin'},{name:'Gaussian',field:'gau',color:'#428bca'}]" data-category-axis="{field:'sn',title:{text:'Number of successes in n experiments (equal)'}}" data-value-axis="{title:{text:'Probability'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet1"></div>
                 </div>
             </div>
             <div id="cdf" class="panel panel-default">
@@ -80,7 +115,8 @@
                     Cumulative distribution function
                 </div>
                 <div class="panel-body k-content">
-                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{categoryField:'sn',field:'cdf'}]" data-tooltip="{visible:true}" data-bind="source: cdf"></div>
+                    <p>The cumulative distribution function (CDF), or just distribution function, describes the probability that a real-valued random variable X with a given probability distribution will be found to have a value less than or equal to x.</p>
+                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Binomial',field:'bin'},{name:'Gaussian',field:'gau',color:'#428bca'}]" data-category-axis="{field:'sn',title:{text:'Maximum number of successes in n experiments (less or equal)'}}" data-value-axis="{title:{text:'Probability'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet2"></div>
                 </div>
             </div>
         </div>
