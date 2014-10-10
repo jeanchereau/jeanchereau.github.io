@@ -2,25 +2,30 @@
  * Created by Jean Chereau on 04/10/2014
  * http://www.jeanchereau.com/projects/harvardx/index.html
  */
+
+/* jshint browser:true, jquery: true */
+
 ;(function(window, $, undefined){
 
     // TODO: optimize packaging
+    // Possibly use an array of precalculated binomial coeffs with a javascript bignumber library to increase number of experiments
 
+    var kendo = window.kendo;
 
     //Function n*(n-1)*(n-2)*... (k+2)*(k+1)*k
-    //Recursion induces stack overflows
+    //Avoids recursion which induces stack overflows
     function fact(n, k) {
         if (!k) {
             k = 1; //n!
         }
         if (k > n || n < 0 || k < 0) {
-            throw new RangeError('We should have n >= k >= 0')
+            throw new RangeError('We should have n >= k >= 0');
         }
-        if(n == 0) {
-            return 1
+        if(n === 0) {
+            return 1;
         } else {
-            ret = 1;
-            for(i = k; i <= n; i++) {
+            var ret = 1;
+            for(var i = k; i <= n; i++) {
                 ret *= i;
             }
             return ret;
@@ -30,7 +35,7 @@
     //Binomial coeff
     function coeff(n, k) {
         if (n === k) {
-            return 1
+            return 1;
         } else {
             return fact(n, k + 1) / fact(n - k, 1);
             //return fact(n)/(fact(k)*fact(n-k));
@@ -49,17 +54,18 @@
 
     //event handler triggered when the window/page is resized
     function onResize() {
-        var charts = $('.panel-body').find(kendo.roleSelector('chart'));
+        var panels = $('.panel-body');
+        var charts = panels.find(kendo.roleSelector('chart'));
         $.each(charts, function(index, chart) {
             $(chart).data("kendoChart").refresh();
         });
-        var sliders = $('.panel-body').find(kendo.roleSelector('slider'));
+        var sliders = panels.find(kendo.roleSelector('slider'));
         $.each(sliders, function(index, slider) {
             $(slider).data("kendoSlider").resize();
         });
     }
 
-    var viewModel = window.viewModel = kendo.observable({
+    window.viewModel = kendo.observable({
         //success probability
         sp: 0.3,
         $sp: function() {
@@ -76,7 +82,7 @@
             return this.get('e')*this.get('sp');
         },
         //variance
-        var: function() {
+        variance: function() {
             var sp = this.get('sp');
             return this.get('e')*sp*(1-sp);
         },
@@ -153,7 +159,7 @@
             that.reset();
 
             //sn is the number of success events in e experiments
-            for (sn = 1; sn <= e; sn++) {
+            for (var sn = 1; sn <= e; sn++) {
                 calculations(sn, e, sp);
             }
         }

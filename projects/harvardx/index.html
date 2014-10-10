@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head lang="en">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jean Chereau">
+    <meta name="description" content="The binomial distribution is the discrete probability distribution of the number x of successes in a sequence of n independent yes/no experiments, each of which yields success with probability p.">
+    <meta name="keywords" content="statistic,probability,binomial,gaussian,distribution,mass,function,cumulative,density,mean,variance">
     <title>HarvardX Interactive Learning Challenge</title>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.common.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.common-bootstrap.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.bootstrap.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.dataviz.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="http://cdn.kendostatic.com/2014.2.903/js/kendo.all.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="//cdn.kendostatic.com/2014.2.1008/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="//cdn.kendostatic.com/2014.2.1008/styles/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="//cdn.kendostatic.com/2014.2.1008/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="//cdn.kendostatic.com/2014.2.1008/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
+    <link href="//cdn.kendostatic.com/2014.2.1008/styles/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="//cdn.kendostatic.com/2014.2.1008/styles/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!--script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script-->
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.core.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.data.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.binder.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.progressbar.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.userevents.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.draganddrop.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.slider.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.dataviz.core.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.dataviz.canvas.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.dataviz.svg.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.dataviz.themes.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.dataviz.chart.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.dataviz.vml.min.js"></script>
+    <!--script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.all.min.js"></script-->
     <script src="main.js"></script>
 </head>
 <body>
@@ -34,7 +56,7 @@
                 <div class="panel-heading">Descripton</div>
                 <div class="panel-body k-content">
                     <div class="form-group">
-                        <p>The binomial distribution is the discrete probability distribution of the number of successes in a sequence of <strong>n</strong> independent yes/no experiments, each of which yields success with probability <strong>p</strong>.</p>
+                        <p>The binomial distribution is the discrete probability distribution of the number <strong>x</strong> of successes in a sequence of <strong>n</strong> independent yes/no experiments, each of which yields success with probability <strong>p</strong>.</p>
                     </div>
                     <div class="form-group">
                         <p><div id="progress" data-role="progressbar" data-type="percent" data-animation="false" data-bind="value:progress"  style="width:100%"></div></p>
@@ -83,7 +105,7 @@
                         </div>
                         <div class="form-group">
                             <label for="v">Variance (np(1-p)): </label>
-                            <span id="v" class="form-control-static" data-bind="text:var"></span>
+                            <span id="v" class="form-control-static" data-bind="text:variance"></span>
                         </div>
                         <div class="form-group">
                             <label class="radio-inline">
@@ -106,8 +128,8 @@
                     Probability mass function
                 </div>
                 <div class="panel-body k-content">
-                    <p>The probability mass function (PMF), or just probability function, describes the probability that a real-valued random variable X with a given probability distribution will be found to have a value equal to x.</p>
-                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Binomial',field:'bin'},{name:'Gaussian',field:'gau',color:'#428bca'}]" data-category-axis="{field:'sn',title:{text:'Number of successes in n experiments (equal)'}}" data-value-axis="{title:{text:'Probability'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet1"></div>
+                    <p>The probability mass function (PMF), or just probability function, describes the probability that a real-valued random variable X with a given probability distribution will be found to have a value <strong>equal to x.</strong></p>
+                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Binomial',field:'bin'},{name:'Gaussian',field:'gau',color:'#428bca'}]" data-category-axis="{field:'sn',title:{text:'Number x of successes in n experiments',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-value-axis="{title:{text:'Probability P(X=x)',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet1"></div>
                 </div>
             </div>
             <div id="cdf" class="panel panel-default">
@@ -115,8 +137,8 @@
                     Cumulative distribution function
                 </div>
                 <div class="panel-body k-content">
-                    <p>The cumulative distribution function (CDF), or just distribution function, describes the probability that a real-valued random variable X with a given probability distribution will be found to have a value less than or equal to x.</p>
-                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Binomial',field:'bin'},{name:'Gaussian',field:'gau',color:'#428bca'}]" data-category-axis="{field:'sn',title:{text:'Maximum number of successes in n experiments (less or equal)'}}" data-value-axis="{title:{text:'Probability'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet2"></div>
+                    <p>The cumulative distribution function (CDF), or just distribution function, describes the probability that a real-valued random variable X with a given probability distribution will be found to have a value <strong>less than or equal to x.</strong></p>
+                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Binomial',field:'bin'},{name:'Gaussian',field:'gau',color:'#428bca'}]" data-category-axis="{field:'sn',title:{text:'Maximum number x of successes in n experiments',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-value-axis="{title:{text:'Probability P(X&le;x)',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet2"></div>
                 </div>
             </div>
         </div>
