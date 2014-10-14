@@ -22,7 +22,9 @@
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!--script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script-->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- use http://www.telerik.com/download/custom-download -->
     <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.core.min.js"></script>
     <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.data.min.js"></script>
     <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.binder.min.js"></script>
@@ -30,6 +32,8 @@
     <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.userevents.min.js"></script>
     <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.draganddrop.min.js"></script>
     <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.slider.min.js"></script>
+    <!--script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.popup.min.js"></script>
+    <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.tooltip.min.js"></script-->
     <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.dataviz.core.min.js"></script>
     <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.dataviz.canvas.min.js"></script>
     <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.dataviz.svg.min.js"></script>
@@ -38,22 +42,53 @@
     <script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.dataviz.vml.min.js"></script>
     <!--script src="//cdn.kendostatic.com/2014.2.1008/js/kendo.all.min.js"></script-->
     <script src="main.js"></script>
+    <style>
+        /*See http://css-tricks.com/svg-sprites-use-better-icon-fonts/ */
+        .hide {
+            display: none;
+        }
+        .icon-tooltip {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+        .binomial {
+            fill: #ff6800;
+        }
+        .gaussian {
+            fill: #428BCA;
+        }
+        .experimentation {
+            fill: #000000;
+        }
+        .panel-heading a {
+            cursor: pointer;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
-
+<svg class="hide">
+    <defs>
+        <g id="icon-tooltip">
+            <path id="speech-bubble-11-icon" d="M50,64.991v293.682h64.501v88.336l131.978-88.336H462V64.991H50z M256,283.567H121.841v-30H256 V283.567z M391.841,223.567h-270v-30h270V223.567z M391.841,163.567h-270v-30h270V163.567z"/>
+         </g>
+    </defs>
+</svg>
 <div class="container">
     <div class="page-header">
         <h1>HarvardX Interactive Learning Challenge</h1>
     </div>
     <div class="row">
         <blockquote>
-            <p>Interactive visualization of the <a href="http://en.wikipedia.org/wiki/Binomial_distribution">binomial distribution</a> by Jean Chereau (London, UK). <a href="http://databits.io/challenges">More info...</a></p>
+            <p>Interactive visualization of the <a href="//en.wikipedia.org/wiki/Binomial_distribution">binomial distribution</a> by Jean Chereau (London, UK). <a href="//databits.io/challenges">More info...</a></p>
         </blockquote>
     </div>
     <div class="row">
         <div class="col-sm-4 area">
             <div id="description" class="panel panel-default">
-                <div class="panel-heading">Descripton</div>
+                <div class="panel-heading">Description</div>
                 <div class="panel-body k-content">
                     <div class="form-group">
                         <p>The binomial distribution is the discrete probability distribution of the number <strong>x</strong> of successes in a sequence of <strong>n</strong> independent yes/no experiments, each of which yields success with probability <strong>p</strong>.</p>
@@ -64,7 +99,21 @@
                 </div>
             </div>
             <div id="binomial" class="panel panel-default">
-                <div class="panel-heading">Binomial distribution</div>
+                <div class="panel-heading">
+                    <span>Binomial distribution</span>&nbsp;&nbsp;
+                    <a tabindex="0" title="Binomial formula">
+                        <svg viewBox="0 0 512 512" class="icon-tooltip binomial" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="#icon-tooltip"></use>
+                        </svg>
+                        <div class="hide">
+                            <div class="content">
+                                <p>The orange series on the charts are calculated using the following formula:</p>
+                                <span class="MathJax_Preview">[P(X=x) = {n \choose x} p^x (1-p)^{n-x}]</span>
+                                <script type="math/tex; mode=display">P(X=x) = {n \choose x} p^x (1-p)^{n-x}</script>
+                            </div>
+                        </div>
+                    </a>
+                </div>
                 <div class="panel-body k-content">
                     <form role="form">
                         <div class="form-group">
@@ -78,8 +127,8 @@
                         </div>
                         <div class="form-group">
                             <label for="d">Number of experiments (n): </label>
-                            <span class="form-control-static" data-bind="text:e"></span>
-                            <p><input id="d" type="number" data-min="1" data-max="150" data-small-step="1" data-large-step="10" data-tick-placement="none" data-role="slider" data-bind="value:e, events:{change:redraw}" style="width:100%"></p>
+                            <span class="form-control-static" data-bind="text:nex"></span>
+                            <p><input id="d" type="number" data-min="1" data-max="150" data-small-step="1" data-large-step="10" data-tick-placement="none" data-role="slider" data-bind="value:nex, events:{change:redraw}" style="width:100%"></p>
                         </div>
                         <div class="form-group">
                             <label class="radio-inline">
@@ -96,15 +145,29 @@
                 </div>
             </div>
             <div id="Gaussian" class="panel panel-default">
-                <div class="panel-heading">Gaussian distribution</div>
+                <div class="panel-heading">
+                    <span>Gaussian distribution</span>&nbsp;&nbsp;
+                    <a tabindex="0" title="Gaussian formula">
+                        <svg viewBox="0 0 512 512" class="icon-tooltip gaussian" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="#icon-tooltip"></use>
+                        </svg>
+                        <div class="hide">
+                            <div class="content">
+                                <p>The blue series on the charts are calculated using the following formula, where &mu; = np and &sigma; = np(1-p):</p>
+                                <span class="MathJax_Preview">[P(X=x) = { 1 \over {\sigma \sqrt {2\pi}} } e^{ - (x-\mu)^2 \over 2\sigma^2 }]</span>
+                                <script type="math/tex; mode=display">P(X=x) = { 1 \over {\sigma \sqrt {2\pi}} } e^{ - (x-\mu)^2 \over 2\sigma^2 }</script>
+                            </div>
+                        </div>
+                    </a>
+                </div>
                 <div class="panel-body k-content">
                     <form role="form">
                         <div class="form-group">
-                            <label for="m">Mean (np): </label>
+                            <label for="m">Mean (&mu; = np): </label>
                             <span id="m" class="form-control-static" data-bind="text:mean"></span>
                         </div>
                         <div class="form-group">
-                            <label for="v">Variance (np(1-p)): </label>
+                            <label for="v">Variance (&sigma; = np(1-p)): </label>
                             <span id="v" class="form-control-static" data-bind="text:variance"></span>
                         </div>
                         <div class="form-group">
@@ -121,6 +184,43 @@
                     </form>
                 </div>
             </div>
+            <div id="Experimentation" class="panel panel-default">
+                <div class="panel-heading">
+                    <span>Experimentation</span>&nbsp;&nbsp;
+                    <a tabindex="0" title="Experimentation data points">
+                        <svg viewBox="0 0 512 512" class="icon-tooltip experimentation" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="#icon-tooltip"></use>
+                        </svg>
+                        <div class="hide">
+                            <div class="content">
+                                <p>The black series on the charts are built from repeating sets of <strong>n</strong> yes/no experiments,
+                                    where each experiment consists in drawing a random number between 0 and 1 using the Math.random JavaScript function
+                                    and a success consists in drawing a number below the success probability <strong>p</strong>.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="panel-body k-content">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="t">Number of times to run the n experiments: </label>
+                            <span class="form-control-static" data-bind="text:t"></span>
+                            <p><input id="t" type="number" data-min="1" data-max="10000" data-small-step="1" data-large-step="100" data-tick-placement="none" data-role="slider" data-bind="value:t, events:{change:redraw}" style="width:100%"></p>
+                        </div>
+                        <div class="form-group">
+                            <label class="radio-inline">
+                                <input type="radio" name="expType" value="line" data-bind="checked:expType,events:{change:redraw}"> Line
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="expType" value="column" data-bind="checked:expType,events:{change:redraw}"> Column
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="expType" value="hide" data-bind="checked:expType,events:{change:redraw}"> Hide
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="col-sm-8 area">
             <div id="pmf" class="panel panel-default">
@@ -129,7 +229,7 @@
                 </div>
                 <div class="panel-body k-content">
                     <p>The probability mass function (PMF), or just probability function, describes the probability that a real-valued random variable X with a given probability distribution will be found to have a value <strong>equal to x.</strong></p>
-                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Binomial',field:'bin'},{name:'Gaussian',field:'gau',color:'#428bca'}]" data-category-axis="{field:'sn',title:{text:'Number x of successes in n experiments',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-value-axis="{title:{text:'Probability P(X=x)',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet1"></div>
+                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Experimentation',field:'exp',color:'#000000'},{name:'Binomial',field:'bin',color:'#FF6800'},{name:'Gaussian',field:'gau',color:'#428BCA'}]" data-category-axis="{field:'sn',title:{text:'Number x of successes in n experiments',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-value-axis="{title:{text:'Probability P(X=x)',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet1"></div>
                 </div>
             </div>
             <div id="cdf" class="panel panel-default">
@@ -138,7 +238,7 @@
                 </div>
                 <div class="panel-body k-content">
                     <p>The cumulative distribution function (CDF), or just distribution function, describes the probability that a real-valued random variable X with a given probability distribution will be found to have a value <strong>less than or equal to x.</strong></p>
-                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Binomial',field:'bin'},{name:'Gaussian',field:'gau',color:'#428bca'}]" data-category-axis="{field:'sn',title:{text:'Maximum number x of successes in n experiments',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-value-axis="{title:{text:'Probability P(X&le;x)',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet2"></div>
+                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Experimentation',field:'exp',color:'#000000'},{name:'Binomial',field:'bin',color:'#FF6800'},{name:'Gaussian',field:'gau',color:'#428BCA'}]" data-category-axis="{field:'sn',title:{text:'Maximum number x of successes in n experiments',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-value-axis="{title:{text:'Probability P(X&le;x)',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet2"></div>
                 </div>
             </div>
         </div>
