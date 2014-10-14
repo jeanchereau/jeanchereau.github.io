@@ -132,12 +132,12 @@
         },
         //mean - http://en.wikipedia.org/wiki/Binomial_distribution#Mean_and_variance
         mean: function() {
-            return this.get('nex')*this.get('sp');
+            return kendo.toString(this.get('nex')*this.get('sp'), 'n3');
         },
         //variance
         variance: function() {
             var sp = this.get('sp');
-            return this.get('nex')*sp*(1-sp);
+            return kendo.toString(this.get('nex')*sp*(1-sp), 'n3');
         },
         //number of times to run the experiment
         t: 1000,
