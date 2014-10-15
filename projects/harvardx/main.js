@@ -174,6 +174,19 @@
                     chart2.options.series[2].type = gauType;
                 }
             }
+            //reset label steps
+            //http://www.telerik.com/forums/scale-intervals-on-x-axis-of-kendoui-charts
+            var nex = this.get('nex');
+            if (nex <= 40) {
+                chart1.options.categoryAxis.labels.step = 1;
+                chart2.options.categoryAxis.labels.step = 1;
+            } else if (nex <= 100) {
+                chart1.options.categoryAxis.labels.step = 5;
+                chart2.options.categoryAxis.labels.step = 5;
+            } else {
+                chart1.options.categoryAxis.labels.step = 10;
+                chart2.options.categoryAxis.labels.step = 10;
+            }
             //reset data
             this.set('dataSet1', []);
             this.set('dataSet2', []);
@@ -186,7 +199,7 @@
                     for (var i = 0; i <= n; i++) {
                         results[i] = 0;
                     }
-                    for (/*var*/ i = 0; i < t; i++) {
+                    for (/*var*/i = 0; i < t; i++) {
                         var x = 0; //count of success events
                         for (var j = 0; j < n; j++) {
                             if (Math.random() < p) { //our success event (we assume there is no difference between < and <=)
@@ -270,7 +283,7 @@
             html: true,
             placement: 'bottom',
             //title - see data-title in html
-            trigger: 'click focus'
+            trigger: 'focus' //'click focus'
         });
         //draw charts
         window.viewModel.redraw();
