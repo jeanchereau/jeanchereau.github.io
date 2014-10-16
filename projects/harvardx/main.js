@@ -233,7 +233,7 @@
                         if (gauType !== 'hide') {
                             node2.gau += dataSet2[k - 1].gau; //cumul
                         }
-                        if (gauType !== 'hide') {
+                        if (expType !== 'hide') {
                             node2.exp += dataSet2[k - 1].exp; //cumul
                         }
                         dataSet2.push(node2);
