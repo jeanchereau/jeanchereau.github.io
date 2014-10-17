@@ -54,13 +54,13 @@
             vertical-align: middle;
         }
         .binomial {
-            fill: #ff6800;
+            fill: #00A0E3; /*#FF6800;*/
         }
         .gaussian {
-            fill: #428BCA;
+            fill: #B72667; /*#428BCA;*/
         }
         .experimentation {
-            fill: #000000;
+            fill: #8A8C8F; /*#000000;*/
         }
         .panel-heading a {
             cursor: pointer;
@@ -94,7 +94,16 @@
                         <p>The binomial distribution is the discrete probability distribution of the number <strong>x</strong> of successes in a sequence of <strong>n</strong> independent yes/no experiments, each of which yields success with probability <strong>p</strong>.</p>
                     </div>
                     <div class="form-group">
-                        <p><div id="progress" data-role="progressbar" data-type="percent" data-animation="false" data-bind="value:progress"  style="width:100%"></div></p>
+                        <div style="display:table;width:100%;">
+                            <div style="display:table-cell;padding-right:18px;">
+                                <div id="progress" data-role="progressbar" data-type="percent" data-animation="false" data-bind="value:progress"  style="width:100%"></div>
+                            </div>
+                            <div class="k-slider" style="display:table-cell;width:20px;">
+                                <a class="k-button k-button-increase" data-bind="events:{click:redraw}">
+                                    <span class="k-icon k-i-arrow-e" title="Re-run">Re-run</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -231,7 +240,7 @@
                 </div>
                 <div class="panel-body k-content">
                     <p>The probability mass function (PMF), or just probability function, describes the probability that a real-valued random variable X with a given probability distribution will be found to have a value <strong>equal to x.</strong></p>
-                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Experimentation',field:'exp',color:'#000000'},{name:'Binomial',field:'bin',color:'#FF6800'},{name:'Gaussian',field:'gau',color:'#428BCA'}]" data-category-axis="{field:'sn',title:{text:'Number x of successes in n experiments',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-value-axis="{title:{text:'Probability P(X=x)',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet1"></div>
+                    <div data-role="chart" data-theme="bootstrap" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Experimentation',field:'exp',color:'#8A8C8F'},{name:'Binomial',field:'bin',color:'#00A0E3'},{name:'Gaussian',field:'gau',color:'#B72667'}]" data-category-axis="{field:'sn',title:{text:'Number x of successes in n experiments',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-value-axis="{title:{text:'Probability P(X=x)',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet1"></div>
                 </div>
             </div>
             <div id="cdf" class="panel panel-default">
@@ -240,7 +249,7 @@
                 </div>
                 <div class="panel-body k-content">
                     <p>The cumulative distribution function (CDF), or just distribution function, describes the probability that a real-valued random variable X with a given probability distribution will be found to have a value <strong>less than or equal to x.</strong></p>
-                    <div data-role="chart" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Experimentation',field:'exp',color:'#000000'},{name:'Binomial',field:'bin',color:'#FF6800'},{name:'Gaussian',field:'gau',color:'#428BCA'}]" data-category-axis="{field:'sn',title:{text:'Maximum number x of successes in n experiments',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-value-axis="{title:{text:'Probability P(X&le;x)',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet2"></div>
+                    <div data-role="chart" data-theme="bootstrap" data-series-defaults="{type:'line',style:'smooth'}" data-series="[{name:'Experimentation',field:'exp',color:'#8A8C8F'},{name:'Binomial',field:'bin',color:'#00A0E3'},{name:'Gaussian',field:'gau',color:'#B72667'}]" data-category-axis="{field:'sn',title:{text:'Maximum number x of successes in n experiments',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-value-axis="{title:{text:'Probability P(X&le;x)',font:'12px \'Helvetica Neue\',Helvetica,Arial,sans-serif'}}" data-legend="{position:'top'}" data-tooltip="{visible:true}" data-bind="source:dataSet2"></div>
                 </div>
             </div>
         </div>
