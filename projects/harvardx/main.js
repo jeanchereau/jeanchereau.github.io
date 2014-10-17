@@ -10,7 +10,9 @@
     // TODO: optimize packaging
     // Possibly use an array of precalculated binomial coeffs with a javascript bignumber library to increase number of experiments
 
-    var kendo = window.kendo;
+    var kendo = window.kendo,
+        ui = kendo.ui,
+        dataviz = kendo.dataviz;
 
     /**
      * Function n*(n-1)*(n-2)*... (k+2)*(k+1)*k
@@ -79,12 +81,18 @@
      */
     function onResize() {
         var charts = $('.panel-body').find(kendo.roleSelector('chart'));
-        $.each(charts, function(index, chart) {
-            $(chart).data("kendoChart").refresh();
+        $.each(charts, function(index, element) {
+            var chart =  $(element).data("kendoChart");
+            if (chart instanceof dataviz.ui.Chart) {
+                chart.refresh();
+            }
         });
         var sliders = $('.panel-body').find(kendo.roleSelector('slider'));
-        $.each(sliders, function(index, slider) {
-            $(slider).data("kendoSlider").resize();
+        $.each(sliders, function(index, element) {
+            var slider = $(element).data("kendoSlider");
+            if (slider instanceof ui.Slider) {
+                slider.resize();
+            }
         });
     }
 
@@ -153,44 +161,47 @@
         progress: 0,
         //change event handler to reset UI
         reset: function() {
-            var binType = this.get('binType'),
+            var that = this,
+                binType = this.get('binType'),
                 gauType = this.get('gauType'),
                 expType = this.get('expType'),
+                nex = this.get('nex'),
                 charts = $('.panel-body').find(kendo.roleSelector('chart'));
-            //reset chart types
-            if (charts.length >= 2) {
-                var chart1 = $(charts[0]).data("kendoChart"),
-                    chart2 = $(charts[1]).data("kendoChart");
-                if (expType !== 'hide') {
-                    chart1.options.series[0].type = expType;
-                    chart2.options.series[0].type = expType;
+            $.each(charts, function(index, element) {
+                var chart = $(element).data("kendoChart");
+                if (chart instanceof dataviz.ui.Chart) {
+                    if (expType !== 'hide') {
+                        chart.options.series[0].type = expType;
+                    }
+                    if (binType !== 'hide') {
+                        chart.options.series[1].type = binType;
+                    }
+                    if (gauType !== 'hide') {
+                        chart.options.series[2].type = gauType;
+                    }
+                    /*
+                    chart.options.series[0].gap = 0;
+                    chart.options.series[1].gap = 0;
+                    chart.options.series[2].gap = 0;
+                    chart.options.series[0].spacing = 0;
+                    chart.options.series[1].spacing = 0;
+                    chart.options.series[2].spacing = 0;
+                    */
+                    //reset label steps
+                    //http://www.telerik.com/forums/scale-intervals-on-x-axis-of-kendoui-charts
+                    if (nex <= 40) {
+                        chart.options.categoryAxis.labels.step = 1;
+                    } else if (nex <= 100) {
+                        chart.options.categoryAxis.labels.step = 5;
+                    } else {
+                        chart.options.categoryAxis.labels.step = 10;
+                    }
                 }
-                if (binType !== 'hide') {
-                    chart1.options.series[1].type = binType;
-                    chart2.options.series[1].type = binType;
-                }
-                if (gauType !== 'hide') {
-                    chart1.options.series[2].type = gauType;
-                    chart2.options.series[2].type = gauType;
-                }
-            }
-            //reset label steps
-            //http://www.telerik.com/forums/scale-intervals-on-x-axis-of-kendoui-charts
-            var nex = this.get('nex');
-            if (nex <= 40) {
-                chart1.options.categoryAxis.labels.step = 1;
-                chart2.options.categoryAxis.labels.step = 1;
-            } else if (nex <= 100) {
-                chart1.options.categoryAxis.labels.step = 5;
-                chart2.options.categoryAxis.labels.step = 5;
-            } else {
-                chart1.options.categoryAxis.labels.step = 10;
-                chart2.options.categoryAxis.labels.step = 10;
-            }
+            });
             //reset data
-            this.set('dataSet1', []);
-            this.set('dataSet2', []);
-            this.set('progress', 0);
+            that.set('dataSet1', []);
+            that.set('dataSet2', []);
+            that.set('progress', 0);
         },
         redraw: function() {
             function experimentation(t, n, p) {
