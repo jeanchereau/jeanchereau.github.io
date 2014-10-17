@@ -54,12 +54,15 @@
             vertical-align: middle;
         }
         .binomial {
-            fill: #00A0E3; /*#FF6800;*/
+            color: #00A0E3; /*#FF6800;*/
+            fill: #00A0E3;
         }
         .gaussian {
-            fill: #B72667; /*#428BCA;*/
+            color: #B72667; /*#428BCA;*/
+            fill: #B72667;
         }
         .experimentation {
+            color: #8A8C8F;
             fill: #8A8C8F; /*#000000;*/
         }
         .panel-heading a {
@@ -116,7 +119,7 @@
                         </svg>
                         <div class="hide">
                             <div class="content">
-                                <p>The orange series on the charts are calculated using the following formula:</p>
+                                <p>The <span class="binomial">blue</span> series on the charts are calculated using the following formula:</p>
                                 <span class="MathJax_Preview">[P(X=x) = {n \choose x} p^x (1-p)^{n-x}]</span>
                                 <script type="math/tex; mode=display">P(X=x) = {n \choose x} p^x (1-p)^{n-x}</script>
                             </div>
@@ -162,7 +165,7 @@
                         </svg>
                         <div class="hide">
                             <div class="content">
-                                <p>The blue series on the charts are calculated using the following formula, where &mu; = np and &sigma; = np(1-p):</p>
+                                <p>The <span class="gaussian">purple</span> series on the charts are calculated using the following formula, where &mu; = np and &sigma; = np(1-p):</p>
                                 <span class="MathJax_Preview">[P(X=x) = { 1 \over {\sigma \sqrt {2\pi}} } e^{ - (x-\mu)^2 \over 2\sigma^2 }]</span>
                                 <script type="math/tex; mode=display">P(X=x) = { 1 \over {\sigma \sqrt {2\pi}} } e^{ - (x-\mu)^2 \over 2\sigma^2 }</script>
                             </div>
@@ -202,7 +205,7 @@
                         </svg>
                         <div class="hide">
                             <div class="content">
-                                <p>The black series on the charts are built from repeating sets of <strong>n</strong> yes/no experiments,
+                                <p>The <span class="experimentation">gray</span> series on the charts are built from repeating samples of <strong>n</strong> yes/no experiments,
                                     where each experiment consists in getting a random number between 0 and 1 using the Math.random JavaScript function
                                     and a success consists in getting a number below the success probability <strong>p</strong>.</p>
                                 <!--p>A data point at coordinate <strong>x</strong> represents the number of cases where a set of <strong>n</strong> yes/no experiments
