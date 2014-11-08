@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <style>
+        h2{
+          color:#569876;
+            background-color: darkorange;
+            text-decoration: underline;
+            width: 300px;
+        }
+        #hello{
+            border: solid 1px black;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            width: 200px;
+            padding: 20px;
+            margin-left: 20px;
+        }
+        .beautiful{
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script>
+
+        function factoriel(n) {
+            var result=1;
+            for(var i=1; i<=n; i++) {
+                result=i*result
+            }
+            return result;
+        }
+
+        $(document).ready(function(){
+            var button = $("#go");
+            button.on("click",function(e){
+                e.preventDefault();
+                var n = parseInt($("#number").val());
+                var f = factoriel(n);
+                console.log(f);
+                var el=$("#result");
+                el.text(f.toString());
+                //debugger;
+                return false;
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <h1 style="color:#FF0000">heading1</h1>
+    <h2>heading2</h2>
+    <h3>heading3</h3>
+
+    <p id="hello">Hello world!</p>
+    <p class="beautiful">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do <b>eiusmod</b> tempor <strong>incididunt</strong> ut labore et dolore magna aliqua.<br/> Ut enim ad minim veniam, quis <i>nostrud</i> exercitation <em>ullamco</em> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+    <p>While you'll still have access to all the <a href="http://www.networksolutions.com/timeout.html">Network Solutions.com</a> products and services
+        you currently enjoy, you can now take advantage of Web.com's acclaimed "build it for me" services!
+        From custom websites and social media to online marketing, Web.com can help.</p>
+
+    <ol>
+        <li>carrot</li>
+        <li>potatoes</li>
+        <li>tomatoes</li>
+    </ol>
+
+    <ul>
+        <li>leak</li>
+        <li>steak</li>
+        <li>fries</li>
+    </ul>
+
+    <hr/>
+
+    <div>
+        "That’s where we’re going – the Notch,” said my guide Sarah Peterson.
+    </div>
+    <div>
+        "That’s where we’re going – the Notch,” said my guide Sarah Peterson.
+    </div>
+    <span>"That’s where we’re going – the Notch,” said my guide Sarah Peterson.</span>
+    <span>"That’s where we’re going – the Notch,” said my guide Sarah Peterson.</span>
+
+    <table>
+        <tr>
+            <td>
+                column 1
+            </td>
+            <td>
+                column 2
+            </td>
+        </tr>
+    </table>
+
+    <form>
+        <div>
+            <label for="name">name:</label><input id="name" type="text">
+        </div>
+
+        <div>
+            <label>gender:</label><input name="gender" type="radio" value="male" checked>male<input name="gender" type="radio" value="female">female
+        </div>
+
+        <div>
+            <label>happy:</label><input id="happiness" type="checkbox">
+        </div>
+
+        <div>
+            <label>age:</label><input id="age" type="number" value="18">
+        </div>
+        <div>
+            <label>DOB:</label><input id="DOB" type="date">
+        </div>
+        <div>
+            <label>Comment:</label>
+            <textarea></textarea>
+        </div>
+        <div>
+            <label>hair:</label>
+            <select id="haircolor">
+                <option value="blonde">Blonde</option>
+                <option value="black">Black</option>
+                <option value="red" selected>Red</option>
+
+            </select>
+        </div>
+    </form>
+    <hr>
+    <img src="music.png" style="height:300px;width:600px">
+
+    <form>
+        <label>number:</label><input id="number" type="number">
+        <button id="go">Go</button>
+        <div id="result"></div>
+    </form>
+
+
+
+
+</body>
+</html>

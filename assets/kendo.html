@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.black.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var contact = {
+                firstName:"Jean",
+                lastName:"Chereau",
+                address:{
+                    number:13,
+                    street:"Lilyville rd",
+                    city:"London",
+                    postalCode:"SW6 5DP"
+                },
+                speak:function(){
+                    return "Hello, my name is " + this.firstName;
+                }
+
+            };
+            $("#comment").text(contact.speak());
+            debugger;
+            // create NumericTextBox from input HTML element
+            $("#numeric").kendoSlider({
+                increaseButtonTitle: "Right",
+                decreaseButtonTitle: "Left",
+                min: -10,
+                max: 10,
+                smallStep: 2,
+                largeStep: 1
+            }).data("kendoSlider");
+
+            $("#dialog").kendoWindow({
+                width: "600px",
+                title: "About Alvar Aalto",
+                actions: [
+                    "Pin",
+                    "Minimize",
+                    "Maximize",
+                    "Close"
+                ]//,
+                //close: onClose
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <div id="dialog">
+        <p id="comment"></p>
+        <input id="numeric" type="number">
+    </div>
+
+
+</body>
+</html>
