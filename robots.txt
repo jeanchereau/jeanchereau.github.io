@@ -1,3 +1,2 @@
 User-agent: *
-Disallow: /assets/
-Disallow: /projects/harvardx
+Disallow: /assets/s
